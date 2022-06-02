@@ -55,6 +55,18 @@ public class Trip implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(
+			name="UserXTrip",
+			joinColumns = @JoinColumn(name="trip_id"),
+			inverseJoinColumns = @JoinColumn(name="user_id"))
+	private Set<User> users = new HashSet<User>();
+	
+	
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name ="stationId")
+	private Station station;
+	
 	public Trip() {
 		super();
 	}
@@ -67,6 +79,22 @@ public class Trip implements Serializable {
 		this.available_seats = available_seats;
 		this.departure_time = departure_time;
 		this.arrival_time = arrival_time;
+		this.users = users;
+	}
+
+	
+
+
+	public Station getStation() {
+		return station;
+	}
+
+	public void setStation(Station station) {
+		this.station = station;
+	}
+
+	public void setUsers(Set<User> users) {
+		this.users = users;
 	}
 
 	public User getU() {
@@ -125,6 +153,10 @@ public class Trip implements Serializable {
 
 	public void setArrival_time(Date arrival_time) {
 		this.arrival_time = arrival_time;
+	}
+
+	public void registerTotrip(User user) {
+		this.users.add(user);
 	}
 	
 	public void setUser(User u) {

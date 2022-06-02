@@ -37,6 +37,8 @@ public class User implements Serializable{
 	
 	private String role;
 	
+	@ManyToMany(mappedBy ="users", fetch = FetchType.EAGER)
+	private Set<Trip> trips = new HashSet<Trip>();
 	
 	private boolean loggedIn;
 	
@@ -67,6 +69,14 @@ public class User implements Serializable{
 	public void setNotifications(Set<Notification> notifications) {
 		this.notifications = notifications;
 	}
+
+	public Set<Trip> getTrips() {
+		return trips;
+	}
+	public void setTrips(Set<Trip> trips) {
+		this.trips = trips;
+	}
+
 
 	public boolean isLoggedIn() {
 		return loggedIn;
@@ -115,7 +125,10 @@ public class User implements Serializable{
 	public void setRole(String role) {
 		this.role = role;
 	}
-
+	public void addTripToUser(Trip trip){
+		this.trips.add(trip);
+		
+	}
 	public void addNotification(Notification notification)
 	{
 		this.notifications.add(notification);	

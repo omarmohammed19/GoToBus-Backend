@@ -37,8 +37,11 @@ public class User implements Serializable{
 	
 	private String role;
 	
+	
 	private boolean loggedIn;
 	
+	@OneToMany(mappedBy= "user",fetch= FetchType.EAGER)
+	private Set<Notification> notifications = new HashSet<Notification>();
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -57,6 +60,13 @@ public class User implements Serializable{
 		this.loggedIn=false;
 	}
 
+	
+	public Set<Notification> getNotifications() {
+		return this.notifications;
+	}
+	public void setNotifications(Set<Notification> notifications) {
+		this.notifications = notifications;
+	}
 
 	public boolean isLoggedIn() {
 		return loggedIn;
@@ -104,5 +114,11 @@ public class User implements Serializable{
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	public void addNotification(Notification notification)
+	{
+		this.notifications.add(notification);	
+		System.out.println(notification.getMessage());
 	}
 }

@@ -33,7 +33,6 @@ public class UserRest {
 	public List<User> listAllUsers(){
 		return userservice.getAllUsers();
 	}
-
 	
 	@POST
 	@Path("/user")

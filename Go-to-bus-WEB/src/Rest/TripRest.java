@@ -41,7 +41,7 @@ public class TripRest {
 	}
 	
 	@POST
-	@Path("/trips")
+	@Path("/trip")
 	public Response createTrip(Trip trip) {
 		Response.ResponseBuilder builder = null;
 		if(tripservices.createTrip(trip))
@@ -63,7 +63,7 @@ public class TripRest {
 		return tripservices.getTripById(id);
 	}
 
-	@PUT
+	@POST
 	@Path("/booktrip")
 	public Response bookTrip(UserXTrip uXt) {
 		

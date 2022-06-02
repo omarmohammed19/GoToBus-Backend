@@ -82,4 +82,23 @@ public class TripRest {
 			return builder.build();
 	}
 	
+	@POST
+	@Path("/searchtrips")
+	public Set<Trip> searchTrip(SearchTrips st)
+	{
+		Response.ResponseBuilder builder = null;
+		
+		try
+		{
+			return  tripservices.searchTrips(st);
+			//builder = Response.ok();
+			
+		}catch(Exception e)
+		{
+			Map<String, String> responseObj= new HashMap<String,String>();
+			responseObj.put("error", e.getMessage());
+			builder = Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(responseObj);
+		}
+		return tripservices.searchTrips(st);
+	}
 }
